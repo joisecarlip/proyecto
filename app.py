@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/predecir": {"origins": "http://localhost:5000"}})
 
 datos = pd.read_csv("./proyecto2.0/DATOS_ESTRES -Universidades.csv")
 datos = datos.drop(["Unnamed: 0", "DEPARTAMENTO", "UNIVERSIDAD", "DNI"], axis=1)
@@ -45,4 +45,5 @@ def predecir():
     return jsonify({"error": "Método no permitido"}), 405
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)  # Cambié el puerto a 5001, pero puedes elegir otro
+    app.run(debug=True, host='0.0.0.0', port=5001)
+
