@@ -8,7 +8,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-datos = pd.read_csv("./proyecto2.0/DATOS_ESTRES -Universidades.csv")
+datos = pd.read_csv("./Data/DATOS_ESTRES -Universidades.csv")
 datos = datos.drop(["Unnamed: 0", "DEPARTAMENTO", "UNIVERSIDAD", "DNI"], axis=1)
 
 dummies_sex = pd.get_dummies(datos["SEXO"], drop_first=True)
