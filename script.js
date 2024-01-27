@@ -1,11 +1,13 @@
-function predecir() {
+function predecir(event) {
+    event.preventDefault(); 
+
     var edad = document.getElementById("edad").value;
     var sexo = document.getElementById("sexo").value;
 
-    fetch('http://127.0.0.1:5000/predecir', {
+    fetch('http://127.0.0.1:5001/predecir', {
         method: 'POST',
         headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: 'edad=' + edad + '&sexo=' + sexo,
     })
@@ -16,3 +18,4 @@ function predecir() {
         document.getElementById("resultado-container").innerHTML = "Nivel de estrés: " + resultado.Nivel_de_estres;
     });
 }
+
