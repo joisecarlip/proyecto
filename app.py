@@ -2,13 +2,12 @@ from flask import Flask, render_template, request, jsonify
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
-datos = pd.read_csv("./Data/DATOS_ESTRES -Universidades.csv")
+datos = pd.read_csv("./proyecto2.0/DATOS_ESTRES -Universidades.csv")
 datos = datos.drop(["Unnamed: 0", "DEPARTAMENTO", "UNIVERSIDAD", "DNI"], axis=1)
 
 dummies_sex = pd.get_dummies(datos["SEXO"], drop_first=True)
@@ -28,7 +27,7 @@ modelo.fit(X_ent, y_ent)
 def index():
     return render_template('index.html', resultado="")
 
-@app.route('/predecir', methods=['GET', 'POST'])
+@app.route('/predecir', methods=['POST'])
 def predecir():
     if request.method == 'POST':
         edad = int(request.form['edad'])
@@ -46,4 +45,4 @@ def predecir():
     return jsonify({"error": "Método no permitido"}), 405
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5001)  # Cambié el puerto a 5001, pero puedes elegir otro
