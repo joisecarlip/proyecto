@@ -4,12 +4,12 @@ function predecir(event) {
     var edad = document.getElementById("edad").value;
     var sexo = document.getElementById("sexo").value;
 
-    fetch('http://127.0.0.1:5001/predecir', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'edad=' + edad + '&sexo=' + sexo,
+    fetch('http://localhost:5001/predecir', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: 'edad=' + edad + '&sexo=' + sexo,
     })
     .then(response => response.json())
     .then(resultado => {
